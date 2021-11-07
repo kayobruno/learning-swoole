@@ -1,0 +1,21 @@
+{
+    "name": "kb/learning-swoole",
+    "type": "project",
+    "require-dev": {
+        "swoole/ide-helper": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kb\\LearningSwoole\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kayo Queiroz",
+            "email": "kayo.queiroz@objective.com.br"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^2.3"
+    }
+}
