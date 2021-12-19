@@ -19,7 +19,9 @@ $server->on('Receive', function ($server, $fd, $reactor_id, $data)
 		$response = $responseSIgnOn;
 	} elseif ($messageType === '301') {
 		$response = $responseEchoTest;
-	}
+	} else {
+        Co::sleep(60);
+    }
 
     $server->send($fd, "{$response}");
 });

@@ -6,7 +6,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kb\\LearningSwoole\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [
@@ -16,6 +16,7 @@
         }
     ],
     "require": {
-        "monolog/monolog": "^2.3"
+        "monolog/monolog": "^2.3",
+        "ext-json": "*"
     }
 }
