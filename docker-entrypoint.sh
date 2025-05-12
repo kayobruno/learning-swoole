@@ -2,6 +2,4 @@
 
 composer install
 
-php-fpm
-
 exec "$@"

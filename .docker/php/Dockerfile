@@ -1,20 +1,29 @@
-FROM php:8.0.5-fpm-alpine@sha256:d0ca3bb7ac1328193ef5c246da1de3ff33f663ab5576ef05ad60a9b956707222
+FROM php:8.3-cli
 
-RUN apk add --no-cache bash
-RUN docker-php-ext-install sockets
-RUN apk update && apk upgrade
-RUN apk add m4 autoconf make gcc g++ linux-headers
-RUN pecl install swoole-4.5.5
-RUN docker-php-ext-install sockets
-RUN docker-php-ext-enable swoole sockets
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libcurl4-openssl-dev \
+    pkg-config \
+    libssl-dev \
+    zlib1g-dev \
+    libpcre3-dev \
+    libbrotli-dev \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www
-RUN rm -rf /var/www/html
-
-ADD . /var/www
-RUN chown -R www-data:www-data /var/www
+RUN pecl install swoole && docker-php-ext-enable swoole
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-EXPOSE 9000
-CMD ["php-fpm"]
+WORKDIR /app
+
+COPY . .
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+CMD ["php", "bootstrap.php"]

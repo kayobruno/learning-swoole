@@ -1,25 +1,9 @@
-version: '3'
-
 services:
-  php:
-    build: ./.docker/php
-    entrypoint: ./docker-entrypoint.sh
-    tty: true
+  app:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
     ports:
-      - "9000:9000"
-      - "8080:8080"
+      - "9501:9501"
     volumes:
-      - "./:/var/www"
-    networks:
-      - app_network
-
-  redis:
-        image: redis:alpine3.14@sha256:98f172de9a06352e72923fd36d2b6c8acfa820d47a2bb5d9defc963585424a0a
-        ports:
-            - "6379:6379"
-        networks:
-            - app_network
-
-networks:
-    app_network:
-        driver: bridge
+      - .:/app
