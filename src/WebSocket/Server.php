@@ -36,6 +36,7 @@ class Server
                 "link" => "http://10.0.0.1",
                 "version" => "2.0.1",
                 "last_update" => date('Y-m-d H:i:s'),
+                "patients_in_care" => rand(0, 500),
             ],
             [
                 "name" => "Unidade B",
@@ -43,6 +44,7 @@ class Server
                 "link" => "http://10.0.0.2",
                 "version" => "1.8.0",
                 "last_update" => date('Y-m-d H:i:s'),
+                "patients_in_care" => rand(0, 500),
             ],
             [
                 "name" => "Unidade C",
@@ -50,6 +52,7 @@ class Server
                 "link" => "http://10.0.0.3",
                 "version" => "1.8.0",
                 "last_update" => date('Y-m-d H:i:s'),
+                "patients_in_care" => rand(0, 500),
             ],
             [
                 "name" => "Unidade D",
@@ -57,6 +60,7 @@ class Server
                 "link" => "http://10.0.0.4",
                 "version" => "1.8.0",
                 "last_update" => date('Y-m-d H:i:s'),
+                "patients_in_care" => rand(0, 500),
             ],
             [
                 "name" => "Unidade F",
@@ -64,6 +68,7 @@ class Server
                 "link" => "http://10.0.0.5",
                 "version" => "1.8.0",
                 "last_update" => date('Y-m-d H:i:s'),
+                "patients_in_care" => rand(0, 500),
             ],
         ];
     }
@@ -74,6 +79,7 @@ class Server
             $index = array_rand($this->units);
             $this->units[$index]['last_update'] = date('Y-m-d H:i:s');
             $this->units[$index]['version'] = (int)$this->units[$index]['version'] . "." . rand(1, 9);  
+            $this->units[$index]['patients_in_care'] = rand(0, 500);  
 
             foreach ($this->clients as $fd) {
                 if ($this->server->isEstablished($fd)) {
